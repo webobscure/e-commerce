@@ -1,7 +1,11 @@
 import Stripe from 'stripe';
 
 
+<<<<<<< HEAD
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+=======
+const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`);
+>>>>>>> 3b58860 (connect stripe)
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -30,7 +34,11 @@ export default async function handler(req, res) {
                   },
                   unit_amount: item.price * 100, 
                 },
+<<<<<<< HEAD
                 adjustable_quantity: {
+=======
+                adjustable_quantity: { 
+>>>>>>> 3b58860 (connect stripe)
                   enabled: true,
                   minimum: 1,
                 },
