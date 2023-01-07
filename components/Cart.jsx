@@ -13,27 +13,28 @@ const Cart = () => {
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } =
     useStateContext();
 
-    const handleCheckout = async () => {
-      const stripe = await getStripe();
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
 
-      const response = await fetch('/api/stripe', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'apllication/json',
-        },
-        body: JSON.stringify(cartItems),
-      });
+    const response = await fetch('/api/stripe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cartItems),
+    });
 
-      if(response.statusCode === 500) return;
+    if (response.statusCode === 500) return;
 
-      const data = await response.json()
+    const data = await response.json();
+    console.log(data);
 
-      toast.loading('Redirecting...');
+    toast.loading('Redirecting...');
 
-      stripe.redirectToCheckout({ sessionId: data.id});
-    }
-  
-    return (
+    stripe.redirectToCheckout({ sessionId: data.id });
+  };
+
+  return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
         <button type="submit" className="cart-heading" onClick={() => setShowCart(false)}>
